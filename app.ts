@@ -23,7 +23,7 @@ const sequelize : Sequelize = new Sequelize('postgres://postgres:Simform@123@loc
 //   host : 'localhost',
 //   dialect : 'postgres'
 // })
-app.use('/',async () => {
+app.use('/connect',async () => {
   try {
     const data = await sequelize.authenticate();
     console.log("Successful");
