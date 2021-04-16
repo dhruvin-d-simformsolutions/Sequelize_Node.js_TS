@@ -1,7 +1,7 @@
 import { Sequelize, DataTypes, Model } from 'sequelize';
-import { connection, dbconnection } from "../dbConnection/db";
+import { db } from "../dbConnection/db";
 
-const User = connection.define('User', {
+const User = db.define('User', {
     firstName: {
         type: DataTypes.STRING,
         allowNull: false
@@ -23,17 +23,10 @@ const User = connection.define('User', {
 //     ])
 // })();
 
-connection.sync({ force:true,logging: console.log })
+db.sync({ force:false,logging: console.log })
     .then(() => {
-        User.bulkCreate([
-            { firstName: "Dhruvin", lastName: "Dankhara" },
-            { firstName: "Meet", lastName: "Dankhara" },
-            { firstName: "Hansa", lastName: "Dankhara" },
-        ]).then(() => {
-            return User.findAll();
-        }).then((users) => {
-            console.log(users);
-        });
+        console.log("sync Successful");
+        
     });
 
 // const sequelize = new Sequelize()
