@@ -11,7 +11,7 @@ const User = db.define('User', {
     },
 }, {
     //Other model options go here
-    tableName: 'Users' //Providing the table name directly
+    tableName: 'User' //Providing the table name directly
 });
 
 // (async () => {
@@ -25,11 +25,14 @@ const User = db.define('User', {
 
 db.sync({ force:false,logging: console.log })
     .then(() => {
+        // User.create({
+        //     firstName : "Meet",
+        //     lastName : "abc"
+        // })
         console.log("sync Successful");
-        
     });
-
-// const sequelize = new Sequelize()
+    
+////Model init method
 // class User extends Model { }
 // User.init({
 //     firstName: {
@@ -43,7 +46,6 @@ db.sync({ force:false,logging: console.log })
 //     sequelize,
 //     modelName: 'User',
 //     freezeTableName: true //Enforcing the table name to equal to the model name
-
 // });
 
 // console.log(User == connection.models.User);

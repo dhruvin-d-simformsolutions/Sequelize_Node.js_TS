@@ -1,7 +1,7 @@
 // db
 import { Sequelize } from "sequelize";
 
-export const db: Sequelize = new Sequelize("sedb", "postgres", "Simform@123", {
+export const db: Sequelize = new Sequelize("demo", "postgres", "Simform@123", {
     host: "localhost",
     dialect: "postgres",    
     pool : {
@@ -9,11 +9,14 @@ export const db: Sequelize = new Sequelize("sedb", "postgres", "Simform@123", {
         min : 0,
         acquire : 30000,
         idle : 10000,
+    },
+    define : {
+        freezeTableName : true
     }
 });
 
 // export const dbconnection = () => {
-//     connection.authenticate()
+//     db.authenticate()
 //     .then(() => {
 //         console.log("Conection Established ....");
 //     })

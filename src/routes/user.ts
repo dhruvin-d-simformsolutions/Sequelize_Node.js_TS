@@ -1,6 +1,8 @@
 import { User } from "../Models/user";
 import express from "express";
 import cors from 'cors';
+import {Sequelize,Op} from 'sequelize';
+// import { Sequelize } from "sequelize/types";
 const router = express.Router()
 
 // var corsOptions = {
@@ -37,6 +39,36 @@ router.post('/createUser',async (req,res,next)=>{
             throw new Error("Error occure")
         }
         res.status(200).send(user)
+    } catch (error) {
+        res.status(500).send(error.message)
+    }
+})
+
+router.get('/findall',async (req,res) => {
+    try {
+        const users = await User.findAll({
+        
+            where : {
+                id : {
+                    [Op.eq] : 2
+                }
+            },
+            attributes: [
+                
+                // "id",
+            //     "firstName",
+                "lastName",
+                [sequelize.fn('COUNT', sequelize.col('firstName')),"abc"]
+            ],
+            group : [
+                "lastName"
+            ],
+        });
+        if(!users){
+            throw new Error("Database Error");            
+        }
+        console.log(users);    
+        res.status(200).send(users)
     } catch (error) {
         res.status(500).send(error.message)
     }
