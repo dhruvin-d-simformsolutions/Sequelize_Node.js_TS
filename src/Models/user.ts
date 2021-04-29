@@ -1,7 +1,7 @@
 import { Sequelize, DataTypes, Model } from 'sequelize';
-import { db } from "../dbConnection/db";
+import { connection, dbconnection } from "../dbConnection/db";
 
-const User = db.define('User', {
+const User = connection.define('User', {
     firstName: {
         type: DataTypes.STRING,
         allowNull: false
@@ -23,13 +23,25 @@ const User = db.define('User', {
 //     ])
 // })();
 
-db.sync({ force:false,logging: console.log })
+connection.sync({ force:true,logging: console.log })
     .then(() => {
+<<<<<<< HEAD
         // User.create({
         //     firstName : "Meet",
         //     lastName : "abc"
         // })
         console.log("sync Successful");
+=======
+        User.bulkCreate([
+            { firstName: "Dhruvin", lastName: "Dankhara" },
+            { firstName: "Meet", lastName: "Dankhara" },
+            { firstName: "Hansa", lastName: "Dankhara" },
+        ]).then(() => {
+            return User.findAll();
+        }).then((users) => {
+            console.log(users);
+        });
+>>>>>>> parent of 46b592e... Creating Readme file for model
     });
     
 ////Model init method

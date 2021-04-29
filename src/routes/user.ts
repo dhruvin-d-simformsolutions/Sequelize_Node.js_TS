@@ -5,10 +5,10 @@ import {Sequelize,Op} from 'sequelize';
 // import { Sequelize } from "sequelize/types";
 const router = express.Router()
 
-// var corsOptions = {
-//     origin: 'http://example.com',
-//     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-// }
+var corsOptions = {
+    origin: 'http://example.com',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
 // router.post('/createUser', async (req, res) => {
 //     const { firstName, lastName } = req.body;
 //     console.log(req.body);
@@ -34,11 +34,8 @@ router.post('/createUser',async (req,res,next)=>{
     const { firstName, lastName } = req.body;
     try {
         await User.sync({logging : console.log})
-        const user = await User.create({firstName,lastName})
-        if(!user){
-            throw new Error("Error occure")
-        }
-        res.status(200).send(user)
+        await User.create({firstName,lastName})
+        res.status(200).send(req.headers)
     } catch (error) {
         res.status(500).send(error.message)
     }
